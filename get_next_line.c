@@ -12,40 +12,53 @@
 
 #include "get_next_line.h"
 
-char *rl(char *str, int fd) {
-	int		index_chars;
-	char 	*buff;
+/*
+ * function that reads the file and returns the line
+ */
+char	*ft_readfile(char *conserve, int fd)
+{
+	int		rd;
+	char	*buffer;
 
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buff)
-		return (0);
-	index_chars = 1;
-	while (!ft_strchr(str, '\n') && index_chars != 0)
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	rd = 1;
+	while ((!ft_strchr(conserve, '\n')) == 0 && rd != 0)
 	{
-		index_chars = read(fd, buff, BUFFER_SIZE);
-		if (index_chars == -1)
+		rd = read(fd, buffer, BUFFER_SIZE);
+		if (rd == -1)
 		{
-			free(buff);
-			return (0);
+			if (conserve != NULL)
+				free(conserve);
+			free(buffer);
+			return (NULL);
 		}
-		buff[index_chars] = '\0';
-		str = ft_strjoin(str, buff);
+		buffer[rd] = '\0';
+		conserve = ft_strjoin(conserve, buffer);
 	}
-	free(buff);
-	return (str);
+	free(buffer);
+	return (conserve);
 }
 
-char *get_next_line(int fd)
+/*
+ * function read file line by line, it first checks if fd
+ * is valid, if the buffer size is valid and if the buffer
+ * size is not bigger than the max int value and then it
+ * calls the ft_readfile function to read the file and
+
+ */
+char	*get_next_line(int fd)
 {
-	static char *str;
-	char *line;
+	char		*print;
+	static char	*conserve;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	str = rl(str, fd);
-	if (!str)
-		return (0);
-
-
-
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
+		return (NULL);
+	conserve = ft_readfile(conserve, fd);
+	if (!conserve)
+		return (NULL);
+	print = ft_get_line(conserve);
+	conserve = ft_save(conserve);
+	return (print);
 }
