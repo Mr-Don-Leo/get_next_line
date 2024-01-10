@@ -24,7 +24,7 @@ char	*ft_readfile(char *conserve, int fd)
 	if (!buffer)
 		return (NULL);
 	rd = 1;
-	while ((!ft_strchr(conserve, '\n')) == 0 && rd != 0)
+	while (ft_strchr(conserve, '\n') == 0 && rd != 0)
 	{
 		rd = read(fd, buffer, BUFFER_SIZE);
 		if (rd == -1)
