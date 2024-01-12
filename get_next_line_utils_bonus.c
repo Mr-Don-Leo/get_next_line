@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbabayan <mbabayan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:59:02 by mbabayan          #+#    #+#             */
-/*   Updated: 2024/01/12 12:15:41 by mbabayan         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:13:00 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ char	*ft_strchr(char *concerve, int c)
 }
 
 /*
- * function that returns the line after allocating space for the line
- * and 
+ * function that returns the line
  */
 char	*ft_get_line(char *conserve)
 {
